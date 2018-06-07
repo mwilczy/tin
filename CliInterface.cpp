@@ -141,6 +141,7 @@ void CliInterface::download(std::string hash)
 
 int CliInterface::discover() {
     std::cout << "HOSTY:" << std::endl;
+
     return 0;
 }
 

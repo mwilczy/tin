@@ -7,6 +7,21 @@
 
 
 
+// CODE == 0
+// MESSAGE - SAY HELLO
+// EVERY OTHER SHOULD CONNECT
+// CODE == 1
+// MESSAGE - REQUEST HASH
+// ONLY HOSTS WITH REQUIRED HASH RESPONDS
+struct BroadcastProtocolCodeZero {
+    char code;
+};
+
+struct BroadcastProtocolCodeOne {
+    char code;
+    char hash[32];
+};
+
 
 
 class BinaryProtocol {

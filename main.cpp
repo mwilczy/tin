@@ -19,16 +19,17 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <openssl/sha.h>
-
+#include <openssl/md5.h>
 
 #define PORT "3490"  // the port users will be connecting to
 
 #define BACKLOG 10     // how many pending connections queue will hold
 
 
-
 int main(int argc, char* argv[])
 {
+
+    unsigned char *blabla;
     Server myServer;
     //myServer.startListening();
     printf("%d\n", SHA256_DIGEST_LENGTH);

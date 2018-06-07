@@ -8,6 +8,6 @@ include_directories(${OPENSSL_INCLUDE_DIR})
 #set(OPENSSL_LIBRARIES /usr/local/opt/openssl/lib)
 
 
-add_executable(tin main.cpp Server.cpp Server.h Client.cpp Client.h BinaryProtocol.cpp BinaryProtocol.h CliInterface.cpp CliInterface.h)
+add_executable(tin Broadcast.cpp main.cpp Server.cpp Server.h Client.cpp Client.h BinaryProtocol.cpp BinaryProtocol.h CliInterface.cpp CliInterface.h MerkleDag.cpp MerkleDag.h)
 
 target_link_libraries(tin ${OPENSSL_LIBRARIES} pthread)

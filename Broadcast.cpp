@@ -42,6 +42,23 @@ void Broadcast::sendDiscoverPacket()
     close(sockfd);
 }
 
+
+void Broadcast::addNeighbor(sockaddr_in addr)
+{
+    mtx.lock();
+
+    addrEntry temporary(std::chrono::system_clock::now(), addr);
+    for(auto it : neighbors) {
+        if (it == temporary) {
+            mtx.unlock();
+            return;
+        }
+    }
+    neighbors.push_back(addrEntry(std::chrono::system_clock::now(), addr));
+
+    mtx.unlock();
+}
+
 void Broadcast::listenForDiscoverPackets()
 {
     sockaddr_in si_me, si_other;
@@ -65,7 +82,11 @@ void Broadcast::listenForDiscoverPackets()
         char buf[10000];
         unsigned slen=sizeof(sockaddr);
         recvfrom(s, buf, sizeof(buf)-1, 0, (sockaddr *)&si_other, &slen);
+        addNeighbor(si_other);
+        //inet_ntop(AF_INET, &(sa.sin_addr), str, INET_ADDRSTRLEN);
 
+
+        // check for hash
         printf("recv: %s\n", buf);
     }
 }
