@@ -4,11 +4,20 @@
 
 #include "Server.h"
 
+#define HASH_SIZE 32
 
 void handle_client(int connectSocket)
 {
-    char hello_message[] = {"HELLO WORLD"};
-    send(connectSocket, hello_message, strlen(hello_message), 0);
+    int numbytes;
+    char yes[] = {"y"};
+    char no[] = {"n"};
+    char buffer[32];
+    if ((numbytes = recv(connectSocket, buffer, HASH_SIZE, 0)) == -1) {
+        perror("recv");
+        exit(1);
+    }
+    // check for hash entry in our database
+    send(connectSocket, yes, strlen(yes), 0);
 
     close(connectSocket);
 }

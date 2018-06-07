@@ -25,7 +25,7 @@ class Client {
     int rv;
     char s[INET6_ADDRSTRLEN];
 public:
-    int connectAndSendRequest(char *ip_addr);
+    int connectAndSendRequest(char *ip_addr, char *message);
     void* get_in_addr(struct sockaddr *sa);
 };
 

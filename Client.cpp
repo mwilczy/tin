@@ -5,6 +5,7 @@
 #include "Client.h"
 
 
+
 void* Client::get_in_addr(struct sockaddr *sa)
 {
     if (sa->sa_family == AF_INET) {
@@ -13,7 +14,7 @@ void* Client::get_in_addr(struct sockaddr *sa)
 
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
-int Client::connectAndSendRequest(char *ip_addr)
+int Client::connectAndSendRequest(char *ip_addr, char *message)
 {
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_UNSPEC;
@@ -52,6 +53,7 @@ int Client::connectAndSendRequest(char *ip_addr)
 
     freeaddrinfo(servinfo); // all done with this structure
 
+    send(sockfd, message, strlen(message), 0);
     if ((numbytes = recv(sockfd, buf, MAXDATASIZE-1, 0)) == -1) {
         perror("recv");
         exit(1);
